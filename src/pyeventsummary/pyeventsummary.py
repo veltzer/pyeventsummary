@@ -14,7 +14,7 @@ string format that can be pickled.
 """
 
 
-class Summary:
+class EventSummary:
     err_msg = "only enum values are allowed"
 
     def __init__(
