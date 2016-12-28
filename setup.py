@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
     name='pyeventsummary',
-    version='0.0.1',
+    version='0.0.2',
     description='pyeventsummary is a way to aggregate and report on a host of errors and actions',
     long_description='pyeventsummary is a way to aggregate and report on a host of errors and actions',
     url='https://veltzer.github.io/pyeventsummary',
