@@ -33,11 +33,11 @@ class EventSummary:
         self.exceptions_saved = defaultdict(list)
 
     def add_event(self, value):  # type -> None
-        assert any(isinstance(value, cls) for cls in self.enum_classes)
+        assert any(isinstance(value, cls) for cls in self.enum_classes), EventSummary.err_msg
         self.events[value] += 1
 
     def get_event_count(self, value):  # type -> int
-        assert any(isinstance(value, cls) for cls in self.enum_classes)
+        assert any(isinstance(value, cls) for cls in self.enum_classes), EventSummary.err_msg
         return self.events[value]
 
     def get_enum_classes(self):  # type -> list[class]
