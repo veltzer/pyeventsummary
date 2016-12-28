@@ -1,11 +1,11 @@
 import setuptools
 
 setuptools.setup(
-    name='pysummary',
+    name='pyeventsummary',
     version='0.0.6',
-    description='pysummary is a way to aggregate and report on a host of errors and actions',
-    long_description='pysummary is a way to aggregate and report on a host of errors and actions',
-    url='https://veltzer.github.io/pysummary',
+    description='pyeventsummary is a way to aggregate and report on a host of errors and actions',
+    long_description='pyeventsummary is a way to aggregate and report on a host of errors and actions',
+    url='https://veltzer.github.io/pyeventsummary',
     author='Mark Veltzer',
     author_email='mark.veltzer@gmail.com',
     license='GPL3',
