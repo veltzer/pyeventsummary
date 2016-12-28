@@ -1,0 +1,4 @@
+- add ability not to build error objects at all and use a central singleton object.
+	This object will aggregate enums from various other objects.
+- add ability to print a report of the run to some central persistant location
+	(say /mnt/raid/ubuntu/errors/[date].txt)
