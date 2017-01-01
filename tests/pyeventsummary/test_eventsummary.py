@@ -1,7 +1,6 @@
 from unittest import TestCase
 from enum import Enum
 
-from pyerrors.pyerrors import Errors
 
 from pyeventsummary.pyeventsummary import EventSummary
 
@@ -24,7 +23,7 @@ class TestErrors(TestCase):
         e = EventSummary(enum_class=MyEnum)
         with self.assertRaises(AssertionError) as context:
             e.add_event(1)
-        self.assertTrue(Errors.err_msg in str(context.exception))
+        self.assertTrue(EventSummary.err_msg in str(context.exception))
 
     def test_check_accumulation(self):
         e = EventSummary(enum_class=MyEnum)
