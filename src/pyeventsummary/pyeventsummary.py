@@ -65,7 +65,7 @@ class EventSummary:
                 print("event {} happened {} times".format(enum_member.name, self.events[enum_member]))
         for exception_type, exception_count in self.exceptions_count.items():
             print("exception_type {} happened {} time(s)".format(exception_type, exception_count))
-        for event_type, event_data_list in self.events_data_saved:
+        for event_type, event_data_list in self.events_data_saved.items():
             print("event type {}".format(event_type))
             for event_data in event_data_list:
                 print("\tdata{}".format(event_data))
