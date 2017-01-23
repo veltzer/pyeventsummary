@@ -21,7 +21,8 @@ class EventSummary:
             self,
             enum_class: enum.Enum.__class__=None,
             enum_classes: Iterable[enum.Enum.__class__]=None,
-            num_exceptions_saved: int=5,
+            num_exceptions_saved: int=10,
+            num_events_data_saved: int=10,
     ) -> None:
         if enum_class is not None:
             self.enum_classes = [enum_class]  # type: Iterable[Iterable]
@@ -29,12 +30,16 @@ class EventSummary:
             self.enum_classes = enum_classes  # type: Iterable[Iterable]
         self.events = defaultdict(int)  # type: DefaultDict[int]
         self.num_exceptions_saved = num_exceptions_saved  # type: int
+        self.num_events_data_saved = num_events_data_saved  # type: int
+        self.events_data_saved = defaultdict(list)
         self.exceptions_count = defaultdict(int)
         self.exceptions_saved = defaultdict(list)
 
-    def add_event(self, value) -> None:
+    def add_event(self, value, data=None) -> None:
         assert any(isinstance(value, cls) for cls in self.enum_classes), EventSummary.err_msg
         self.events[value] += 1
+        if data is not None and len(self.events_data_saved[value])<self.num_events_data_saved:
+            self.events_data_saved[value].append(data)
 
     def get_event_count(self, value) -> int:
         assert any(isinstance(value, cls) for cls in self.enum_classes), EventSummary.err_msg
@@ -60,6 +65,10 @@ class EventSummary:
                 print("event {} happened {} times".format(enum_member.name, self.events[enum_member]))
         for exception_type, exception_count in self.exceptions_count.items():
             print("exception_type {} happened {} time(s)".format(exception_type, exception_count))
+        for event_type, event_data_list in self.events_data_saved:
+            print("event type {}".format(event_type))
+            for event_data in event_data_list:
+                print("\tdata{}".format(event_data))
 
     def __enter__(self):
         pass
