@@ -6,7 +6,7 @@ if not sys.version_info[0] == 3:
 
 setuptools.setup(
     name='pyeventsummary',
-    version='0.0.6',
+    version='0.0.7',
     description='pyeventsummary is a way to aggregate and report on a host of errors and actions',
     long_description='pyeventsummary is a way to aggregate and report on a host of errors and actions',
     url='https://veltzer.github.io/pyeventsummary',

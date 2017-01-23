@@ -68,7 +68,7 @@ class EventSummary:
         for event_type, event_data_list in self.events_data_saved.items():
             print("event type {}".format(event_type))
             for event_data in event_data_list:
-                print("\tdata{}".format(event_data))
+                print("\tdata {}".format(event_data))
 
     def __enter__(self):
         pass
