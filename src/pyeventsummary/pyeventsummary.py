@@ -52,6 +52,7 @@ class EventSummary:
         for cls in self.enum_classes:  # type: Iterable
             for enum_member in cls:
                 self.events[enum_member] += event_summary.events[enum_member]
+                self.events_data_saved[enum_member].extend(event_summary.events_data_saved[enum_member])
 
     def add_many(self, event_summaries: Iterable['EventSummary']) -> None:
         for event_summary in event_summaries:
