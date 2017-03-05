@@ -3,6 +3,8 @@ from collections import defaultdict
 from typing import DefaultDict
 from typing import Iterable, Union
 
+import sys
+
 """
 The errors class must be pickle ready since we may use it in multi-process, multi-thread or concurrent.futures
 contexts in which every thread or process will report it's errors using this class.
@@ -38,7 +40,7 @@ class EventSummary:
     def add_event(self, value, data=None) -> None:
         assert any(isinstance(value, cls) for cls in self.enum_classes), EventSummary.err_msg
         self.events[value] += 1
-        if data is not None and len(self.events_data_saved[value])<self.num_events_data_saved:
+        if data is not None and len(self.events_data_saved[value]) < self.num_events_data_saved:
             self.events_data_saved[value].append(data)
 
     def get_event_count(self, value) -> int:
@@ -58,18 +60,21 @@ class EventSummary:
         for event_summary in event_summaries:
             self.add(event_summary)
 
-    def print(self, title=None) -> None:
+    def print(self, title=None, output_file_handle=sys.stdout) -> None:
         if title:
-            print(title)
+            print(title, file=output_file_handle)
         for cls in self.enum_classes:  # type: Iterable
             for enum_member in cls:
-                print("event {} happened {} times".format(enum_member.name, self.events[enum_member]))
+                print("event {} happened {} times".format(enum_member.name, self.events[enum_member]),
+                      file=output_file_handle)
         for exception_type, exception_count in self.exceptions_count.items():
-            print("exception_type {} happened {} time(s)".format(exception_type, exception_count))
+            print("exception_type {} happened {} time(s)".format(exception_type, exception_count),
+                  file=output_file_handle)
         for event_type, event_data_list in self.events_data_saved.items():
-            print("event type {}".format(event_type))
+            print("event type {}".format(event_type),
+                  file=output_file_handle)
             for event_data in event_data_list:
-                print("\tdata [{}]".format(event_data))
+                print("\tdata [{}]".format(event_data), file=output_file_handle)
 
     def __enter__(self):
         pass
