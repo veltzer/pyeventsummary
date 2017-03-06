@@ -60,13 +60,15 @@ class EventSummary:
         for event_summary in event_summaries:
             self.add(event_summary)
 
-    def print(self, title=None, output_file_handle=sys.stdout) -> None:
+    def print(self, title=None, output_file_handle=sys.stdout, show_zero_events=False) -> None:
         if title:
             print(title, file=output_file_handle)
         for cls in self.enum_classes:  # type: Iterable
             for enum_member in cls:
-                print("event {} happened {} times".format(enum_member.name, self.events[enum_member]),
-                      file=output_file_handle)
+                num_events = self.events[enum_member]
+                if num_events > 0 or show_zero_events:
+                    print("event {} happened {} times".format(enum_member.name, num_events),
+                          file=output_file_handle)
         for exception_type, exception_count in self.exceptions_count.items():
             print("exception_type {} happened {} time(s)".format(exception_type, exception_count),
                   file=output_file_handle)
