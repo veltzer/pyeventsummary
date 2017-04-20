@@ -1,6 +1,6 @@
 import enum
 from collections import defaultdict
-from typing import DefaultDict
+from typing import DefaultDict, Type
 from typing import Iterable, Union
 
 import sys
@@ -22,14 +22,14 @@ class EventSummary:
     def __init__(
             self,
             enum_class: enum.Enum.__class__=None,
-            enum_classes: Iterable[enum.Enum.__class__]=None,
+            enum_classes: Iterable[Type]=None,
             num_exceptions_saved: int=10,
             num_events_data_saved: int=10,
     ) -> None:
         if enum_class is not None:
-            self.enum_classes = [enum_class]  # type: Iterable[Iterable]
+            self.enum_classes = [enum_class]  # type: Iterable[Type]
         if enum_classes is not None:
-            self.enum_classes = enum_classes  # type: Iterable[Iterable]
+            self.enum_classes = enum_classes  # type: Iterable[Type]
         self.events = defaultdict(int)  # type: DefaultDict[int]
         self.num_exceptions_saved = num_exceptions_saved  # type: int
         self.num_events_data_saved = num_events_data_saved  # type: int
@@ -47,7 +47,7 @@ class EventSummary:
         assert any(isinstance(value, cls) for cls in self.enum_classes), EventSummary.err_msg
         return self.events[value]
 
-    def get_enum_classes(self) -> Iterable[Iterable]:
+    def get_enum_classes(self) -> Iterable[Type]:
         return self.enum_classes
 
     def add(self, event_summary: 'EventSummary') -> None:
@@ -63,15 +63,18 @@ class EventSummary:
     def print(self, title=None, output_file_handle=sys.stdout, show_zero_events=False) -> None:
         if title:
             print(title, file=output_file_handle)
+        print("counts", file=output_file_handle)
         for cls in self.enum_classes:  # type: Iterable
             for enum_member in cls:
                 num_events = self.events[enum_member]
                 if num_events > 0 or show_zero_events:
                     print("event {} happened {} times".format(enum_member.name, num_events),
                           file=output_file_handle)
+        print("exceptions", file=output_file_handle)
         for exception_type, exception_count in self.exceptions_count.items():
             print("exception_type {} happened {} time(s)".format(exception_type, exception_count),
                   file=output_file_handle)
+        print("event types", file=output_file_handle)
         for event_type, event_data_list in self.events_data_saved.items():
             print("event type {}".format(event_type),
                   file=output_file_handle)
