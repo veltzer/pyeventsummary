@@ -6,7 +6,7 @@ if not sys.version_info[0] == 3:
 
 setuptools.setup(
     name='pyeventsummary',
-    version='0.0.14',
+    version='0.0.15',
     description='pyeventsummary is a way to aggregate and report on a host of errors and actions',
     long_description='pyeventsummary is a way to aggregate and report on a host of errors and actions',
     url='https://veltzer.github.io/pyeventsummary',
@@ -19,6 +19,5 @@ setuptools.setup(
         'Programming Language :: Python :: 3',
     ],
     keywords='python summary errors actions aggregate print enum',
-    package_dir={'': 'src'},
-    packages=setuptools.find_packages('src'),
+    packages=setuptools.find_packages(),
 )
