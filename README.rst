@@ -1,1 +1,2 @@
-This is to make 'python setup.py sdist' happy...
+# pyeventsummary
+Help you aggregate various types of events happening in your code
