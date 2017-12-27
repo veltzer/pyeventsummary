@@ -5,7 +5,7 @@ setuptools.setup(
     version='0.0.15',
     description='pyeventsummary is a way to aggregate and report on a host of errors and actions',
     long_description='pyeventsummary is a way to aggregate and report on a host of errors and actions',
-    url='https://github.com/veltzer/pyeventsummary',
+    url='https://veltzer.github.io/pyeventsummary',
     download_url='https://github.com/veltzer/pyeventsummary',
     author='Mark Veltzer',
     author_email='mark.veltzer@gmail.com',
