@@ -12,5 +12,6 @@ project website: https://veltzer.github.io/pyeventsummary
 
 author: Mark Veltzer
 
-version: 0.0.16
+version: 0.0.17
+
 
