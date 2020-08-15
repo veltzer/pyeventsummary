@@ -17,8 +17,11 @@
 ![Downloads](https://pepy.tech/badge/pyeventsummary/week)
 
 
+
 pyeventsummary is a way to aggregate and report on a host of errors and actions
 
 project website: <https://veltzer.github.io/pyeventsummary>
+
+chat with me at [![gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/veltzer/mark.veltzer)
 
 
