@@ -16,6 +16,8 @@
 ![Downloads](https://pepy.tech/badge/pyeventsummary/month)
 ![Downloads](https://pepy.tech/badge/pyeventsummary/week)
 
+[![Known Vulnerabilities](https://snyk.io/test/github/veltzer/pyeventsummary/badge.svg?targetFile=requirements.txt)](https://snyk.io/test/github/veltzer/pyeventsummary?targetFile=requirements.txt)
+
 
 
 pyeventsummary is a way to aggregate and report on a host of errors and actions
