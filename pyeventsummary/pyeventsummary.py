@@ -5,26 +5,26 @@ from typing import Iterable, Union
 
 import sys
 
-"""
-The errors class must be pickle ready since we may use it in multi-process, multi-thread or concurrent.futures
-contexts in which every thread or process will report it's errors using this class.
-
-A result of this is that we cannot hold the traceback object as is is not pickle able:
-TypeError: can't pickle traceback objects
-This means that if we want to store tracebacks as example we must convert them into some
-string format that can be pickled.
-"""
-
 
 class EventSummary:
+    """
+    The errors class must be pickle ready since we may use it in multi-process, multi-thread or concurrent.futures
+    contexts in which every thread or process will report it's errors using this class.
+
+    A result of this is that we cannot hold the traceback object as is is not pickle able:
+    TypeError: can't pickle traceback objects
+    This means that if we want to store tracebacks as example we must convert them into some
+    string format that can be pickled.
+    """
+
     err_msg = "only enum values are allowed"
 
     def __init__(
             self,
-            enum_class: enum.Enum.__class__=None,
-            enum_classes: Iterable[Type]=None,
-            num_exceptions_saved: int=10,
-            num_events_data_saved: int=10,
+            enum_class: enum.Enum.__class__ = None,
+            enum_classes: Iterable[Type] = None,
+            num_exceptions_saved: int = 10,
+            num_events_data_saved: int = 10,
     ) -> None:
         if enum_class is not None:
             self.enum_classes = [enum_class]  # type: Iterable[Type]
@@ -90,3 +90,4 @@ class EventSummary:
             if len(self.exceptions_saved[e_type]) < self.num_exceptions_saved:
                 self.exceptions_saved[e_type].append((e_val, "trace_back"))
             return True
+        return False
