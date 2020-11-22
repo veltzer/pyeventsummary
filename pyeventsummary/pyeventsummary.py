@@ -27,12 +27,12 @@ class EventSummary:
             num_events_data_saved: int = 10,
     ) -> None:
         if enum_class is not None:
-            self.enum_classes = [enum_class]  # type: Iterable[Type]
+            self.enum_classes: Iterable[Type] = [enum_class]
         if enum_classes is not None:
-            self.enum_classes = enum_classes  # type: Iterable[Type]
-        self.events = defaultdict(int)  # type: DefaultDict[int]
-        self.num_exceptions_saved = num_exceptions_saved  # type: int
-        self.num_events_data_saved = num_events_data_saved  # type: int
+            self.enum_classes: Iterable[Type] = enum_classes
+        self.events: DefaultDict[int] = defaultdict(int)
+        self.num_exceptions_saved: int = num_exceptions_saved
+        self.num_events_data_saved: int = num_events_data_saved
         self.events_data_saved = defaultdict(list)
         self.exceptions_count = defaultdict(int)
         self.exceptions_saved = defaultdict(list)
@@ -51,7 +51,8 @@ class EventSummary:
         return self.enum_classes
 
     def add(self, event_summary: 'EventSummary') -> None:
-        for cls in self.enum_classes:  # type: Iterable
+        cls: Iterable
+        for cls in self.enum_classes:
             for enum_member in cls:
                 self.events[enum_member] += event_summary.events[enum_member]
                 self.events_data_saved[enum_member].extend(event_summary.events_data_saved[enum_member])
@@ -64,7 +65,8 @@ class EventSummary:
         if title:
             print(title, file=output_file_handle)
         print("counts", file=output_file_handle)
-        for cls in self.enum_classes:  # type: Iterable
+        cls: Iterable
+        for cls in self.enum_classes:
             for enum_member in cls:
                 num_events = self.events[enum_member]
                 if num_events > 0 or show_zero_events:
