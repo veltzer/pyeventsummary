@@ -12,11 +12,6 @@
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/pyeventsummary)
 
 ![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)
-![Downloads](https://pepy.tech/badge/pyeventsummary)
-![Downloads](https://pepy.tech/badge/pyeventsummary/month)
-![Downloads](https://pepy.tech/badge/pyeventsummary/week)
-
-[![Known Vulnerabilities](https://snyk.io/test/github/veltzer/pyeventsummary/badge.svg?targetFile=requirements.txt)](https://snyk.io/test/github/veltzer/pyeventsummary?targetFile=requirements.txt)
 
 
 Actions
