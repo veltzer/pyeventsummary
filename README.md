@@ -14,7 +14,6 @@
 ![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)
 
 ![build](https://github.com/veltzer/pyeventsummary/workflows/build/badge.svg)
-
 pyeventsummary is a way to aggregate and report on a host of errors and actions
 
 project website: https://veltzer.github.io/pyeventsummary
