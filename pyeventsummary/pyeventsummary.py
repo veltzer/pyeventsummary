@@ -70,18 +70,17 @@ class EventSummary:
             for enum_member in cls:
                 num_events = self.events[enum_member]
                 if num_events > 0 or show_zero_events:
-                    print("event {} happened {} times".format(enum_member.name, num_events),
+                    print(f"event {enum_member.name} happened {num_events} times",
                           file=output_file_handle)
         print("exceptions", file=output_file_handle)
         for exception_type, exception_count in self.exceptions_count.items():
-            print("exception_type {} happened {} time(s)".format(exception_type, exception_count),
+            print(f"exception_type {exception_type} happened {exception_count} time(s)",
                   file=output_file_handle)
         print("event types", file=output_file_handle)
         for event_type, event_data_list in self.events_data_saved.items():
-            print("event type {}".format(event_type),
-                  file=output_file_handle)
+            print(f"event type {event_type}", file=output_file_handle)
             for event_data in event_data_list:
-                print("\tdata [{}]".format(event_data), file=output_file_handle)
+                print(f"\tdata [{event_data}]", file=output_file_handle)
 
     def __enter__(self):
         pass
