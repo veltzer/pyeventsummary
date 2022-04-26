@@ -27,7 +27,7 @@ project_keywords = [
     "enum",
 ]
 project_license = "MIT"
-project_year_started = "2016"
+project_year_started = 2016
 project_description = project_short_description
 project_platforms = [
     "python3",
