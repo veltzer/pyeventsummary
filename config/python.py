@@ -11,4 +11,5 @@ test_requires = [
     "pyflakes",
     "flake8",
     "pymakehelper",
+    "mypy",
 ]
