@@ -1,6 +1,6 @@
-import enum
+# import enum
 from collections import defaultdict
-from typing import DefaultDict, Type
+from typing import DefaultDict, Type, List
 from typing import Iterable, Union
 
 import sys
@@ -21,21 +21,22 @@ class EventSummary:
 
     def __init__(
             self,
-            enum_class: enum.Enum.__class__ = None,
-            enum_classes: Iterable[Type] = None,
+            enum_class: Type = None,
+            enum_classes: List[Type] = None,
             num_exceptions_saved: int = 10,
             num_events_data_saved: int = 10,
     ) -> None:
         if enum_class is not None:
-            self.enum_classes: Iterable[Type] = [enum_class]
+            classes = [enum_class]
         if enum_classes is not None:
-            self.enum_classes: Iterable[Type] = enum_classes
-        self.events: DefaultDict[int] = defaultdict(int)
+            classes = enum_classes
+        self.enum_classes: List[Type] = classes
+        self.events: DefaultDict[str, int] = defaultdict(int)
         self.num_exceptions_saved: int = num_exceptions_saved
         self.num_events_data_saved: int = num_events_data_saved
-        self.events_data_saved = defaultdict(list)
-        self.exceptions_count = defaultdict(int)
-        self.exceptions_saved = defaultdict(list)
+        self.events_data_saved: DefaultDict[str, List] = defaultdict(list)
+        self.exceptions_count: DefaultDict[str, int] = defaultdict(int)
+        self.exceptions_saved: DefaultDict[str, List] = defaultdict(list)
 
     def add_event(self, value, data=None) -> None:
         assert any(isinstance(value, cls) for cls in self.enum_classes), EventSummary.err_msg
@@ -51,7 +52,6 @@ class EventSummary:
         return self.enum_classes
 
     def add(self, event_summary: 'EventSummary') -> None:
-        cls: Iterable
         for cls in self.enum_classes:
             for enum_member in cls:
                 self.events[enum_member] += event_summary.events[enum_member]
@@ -65,7 +65,6 @@ class EventSummary:
         if title:
             print(title, file=output_file_handle)
         print("counts", file=output_file_handle)
-        cls: Iterable
         for cls in self.enum_classes:
             for enum_member in cls:
                 num_events = self.events[enum_member]
