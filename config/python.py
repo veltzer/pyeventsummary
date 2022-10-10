@@ -1,11 +1,11 @@
 dev_requires = [
-    "pyclassifiers",
     "pypitools",
-    "Sphinx",
 ]
 make_requires = [
     "pymakehelper",
     "pydmt",
+    "Sphinx",
+    "pyclassifiers",
 ]
 test_requires = [
     "pylint",

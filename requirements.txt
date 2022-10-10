@@ -1,14 +1,10 @@
 # THIS IS AN AUTO-GENERATED FILE. DO NOT EDIT!
 # dev requirements
-pyclassifiers
 pypitools
-pydmt
-Sphinx
 # test requirements
 pylint
 pytest
 pytest-cov
 pyflakes
 flake8
-pymakehelper
 mypy
