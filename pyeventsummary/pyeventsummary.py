@@ -1,7 +1,7 @@
 # import enum
 from collections import defaultdict
 from typing import DefaultDict, Type, List
-from typing import Iterable, Union
+from typing import Iterable, Union, Optional
 
 import sys
 
@@ -21,8 +21,8 @@ class EventSummary:
 
     def __init__(
             self,
-            enum_class: Type = None,
-            enum_classes: List[Type] = None,
+            enum_class: Optional[Type] = None,
+            enum_classes: Optional[List[Type]] = None,
             num_exceptions_saved: int = 10,
             num_events_data_saved: int = 10,
     ) -> None:
