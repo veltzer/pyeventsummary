@@ -31,9 +31,9 @@ class TestErrors(TestCase):
             e.add_event(MyEnum.member_a)
         for _ in range(20):
             e.add_event(MyEnum.member_b)
-        self.assertEquals(e.get_event_count(MyEnum.member_a), 10)
-        self.assertEquals(e.get_event_count(MyEnum.member_b), 20)
-        self.assertEquals(e.get_event_count(MyEnum.member_c), 0)
+        self.assertEqual(e.get_event_count(MyEnum.member_a), 10)
+        self.assertEqual(e.get_event_count(MyEnum.member_b), 20)
+        self.assertEqual(e.get_event_count(MyEnum.member_c), 0)
 
     def test_aggregation(self):
         e1 = EventSummary(enum_class=MyEnum)
@@ -45,9 +45,9 @@ class TestErrors(TestCase):
             e1.add_event(MyEnum.member_b)
             e2.add_event(MyEnum.member_a)
         e1.add(e2)
-        self.assertEquals(e1.get_event_count(MyEnum.member_a), 30)
-        self.assertEquals(e1.get_event_count(MyEnum.member_b), 30)
-        self.assertEquals(e1.get_event_count(MyEnum.member_c), 0)
+        self.assertEqual(e1.get_event_count(MyEnum.member_a), 30)
+        self.assertEqual(e1.get_event_count(MyEnum.member_b), 30)
+        self.assertEqual(e1.get_event_count(MyEnum.member_c), 0)
 
     def test_print(self):
         e = EventSummary(MyEnum)
