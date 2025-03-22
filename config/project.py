@@ -1,3 +1,4 @@
+""" project definitions """
 name = "pyeventsummary"
 description_short = "pyeventsummary is a way to aggregate and report on a host of errors and actions"
 keywords = [
