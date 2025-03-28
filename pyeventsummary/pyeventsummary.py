@@ -1,3 +1,5 @@
+""" pyeventsummary.py """
+
 # import enum
 from collections import defaultdict
 from typing import DefaultDict, Type, List
