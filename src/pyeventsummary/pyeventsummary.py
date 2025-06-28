@@ -3,7 +3,8 @@
 # import enum
 from collections import defaultdict
 from typing import DefaultDict, Type, List
-from typing import Iterable, Union, Optional
+from typing import Union, Optional
+from collections.abc import Iterable
 
 import sys
 
@@ -23,8 +24,8 @@ class EventSummary:
 
     def __init__(
             self,
-            enum_class: Optional[Type] = None,
-            enum_classes: Optional[List[Type]] = None,
+            enum_class: type | None = None,
+            enum_classes: list[type] | None = None,
             num_exceptions_saved: int = 10,
             num_events_data_saved: int = 10,
     ) -> None:
@@ -32,13 +33,13 @@ class EventSummary:
             classes = [enum_class]
         if enum_classes is not None:
             classes = enum_classes
-        self.enum_classes: List[Type] = classes
+        self.enum_classes: list[type] = classes
         self.events: DefaultDict[str, int] = defaultdict(int)
         self.num_exceptions_saved: int = num_exceptions_saved
         self.num_events_data_saved: int = num_events_data_saved
-        self.events_data_saved: DefaultDict[str, List] = defaultdict(list)
+        self.events_data_saved: DefaultDict[str, list] = defaultdict(list)
         self.exceptions_count: DefaultDict[str, int] = defaultdict(int)
-        self.exceptions_saved: DefaultDict[str, List] = defaultdict(list)
+        self.exceptions_saved: DefaultDict[str, list] = defaultdict(list)
 
     def add_event(self, value, data=None) -> None:
         assert any(isinstance(value, cls) for cls in self.enum_classes), EventSummary.err_msg
@@ -50,7 +51,7 @@ class EventSummary:
         assert any(isinstance(value, cls) for cls in self.enum_classes), EventSummary.err_msg
         return self.events[value]
 
-    def get_enum_classes(self) -> Iterable[Type]:
+    def get_enum_classes(self) -> Iterable[type]:
         return self.enum_classes
 
     def add(self, event_summary: 'EventSummary') -> None:
@@ -86,7 +87,7 @@ class EventSummary:
     def __enter__(self):
         pass
 
-    def __exit__(self, e_type, e_val, trace_back) -> Union[bool, None]:
+    def __exit__(self, e_type, e_val, trace_back) -> bool | None:
         if e_type is not None:
             self.exceptions_count[e_type] += 1
             if len(self.exceptions_saved[e_type]) < self.num_exceptions_saved:
