@@ -2,9 +2,8 @@
 
 # import enum
 from collections import defaultdict
-from typing import DefaultDict, Type, List
-from typing import Union, Optional
 from collections.abc import Iterable
+from typing import DefaultDict
 
 import sys
 
@@ -12,10 +11,10 @@ import sys
 class EventSummary:
     """
     The errors class must be pickle ready since we may use it in multi-process, multi-thread or concurrent.futures
-    contexts in which every thread or process will report it's errors using this class.
+    contexts in which every thread or process will report its errors using this class.
 
     A result of this is that we cannot hold the traceback object as is is not pickle able:
-    TypeError: can't pickle traceback objects
+    TypeError: cant pickle traceback objects
     This means that if we want to store tracebacks as example we must convert them into some
     string format that can be pickled.
     """
@@ -54,13 +53,13 @@ class EventSummary:
     def get_enum_classes(self) -> Iterable[type]:
         return self.enum_classes
 
-    def add(self, event_summary: 'EventSummary') -> None:
+    def add(self, event_summary: "EventSummary") -> None:
         for cls in self.enum_classes:
             for enum_member in cls:
                 self.events[enum_member] += event_summary.events[enum_member]
                 self.events_data_saved[enum_member].extend(event_summary.events_data_saved[enum_member])
 
-    def add_many(self, event_summaries: Iterable['EventSummary']) -> None:
+    def add_many(self, event_summaries: Iterable["EventSummary"]) -> None:
         for event_summary in event_summaries:
             self.add(event_summary)
 
