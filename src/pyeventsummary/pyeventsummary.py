@@ -57,7 +57,7 @@ class EventSummary:
 
     def add(self, event_summary: "EventSummary") -> None:
         for cls in self.enum_classes:
-            # mypy now knows 'cls' is an Enum class and is iterable.
+            # mypy now knows "cls" is an Enum class and is iterable.
             for enum_member in cls:
                 self.events[enum_member] += event_summary.events[enum_member]
                 self.events_data_saved[enum_member].extend(event_summary.events_data_saved[enum_member])
