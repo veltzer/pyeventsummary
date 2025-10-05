@@ -3,7 +3,7 @@
 from enum import Enum
 from collections import defaultdict
 from collections.abc import Iterable
-from typing import DefaultDict, Type, List
+from typing import DefaultDict, Type
 import sys
 
 
@@ -24,17 +24,17 @@ class EventSummary:
             self,
             # We specify that the class must be a *subclass* of Enum, not just any type.
             enum_class: Type[Enum] | None = None,
-            enum_classes: List[Type[Enum]] | None = None,
+            enum_classes: list[Type[Enum]] | None = None,
             num_exceptions_saved: int = 10,
             num_events_data_saved: int = 10,
     ) -> None:
-        classes: List[Type[Enum]] = []
+        classes: list[Type[Enum]] = []
         if enum_class is not None:
             classes = [enum_class]
         if enum_classes is not None:
             classes = enum_classes
         # This more specific type hint is the key to the fix.
-        self.enum_classes: List[Type[Enum]] = classes
+        self.enum_classes: list[Type[Enum]] = classes
         self.events: DefaultDict[Enum, int] = defaultdict(int)
         self.num_exceptions_saved: int = num_exceptions_saved
         self.num_events_data_saved: int = num_events_data_saved
