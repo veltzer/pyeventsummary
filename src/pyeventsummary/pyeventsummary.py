@@ -1,10 +1,9 @@
 """ pyeventsummary.py """
 
-from enum import Enum
+import sys
 from collections import defaultdict
 from collections.abc import Iterable
-from typing import DefaultDict, Type
-import sys
+from enum import Enum
 
 
 class EventSummary:
@@ -23,24 +22,24 @@ class EventSummary:
     def __init__(
             self,
             # We specify that the class must be a *subclass* of Enum, not just any type.
-            enum_class: Type[Enum] | None = None,
-            enum_classes: list[Type[Enum]] | None = None,
+            enum_class: type[Enum] | None = None,
+            enum_classes: list[type[Enum]] | None = None,
             num_exceptions_saved: int = 10,
             num_events_data_saved: int = 10,
     ) -> None:
-        classes: list[Type[Enum]] = []
+        classes: list[type[Enum]] = []
         if enum_class is not None:
             classes = [enum_class]
         if enum_classes is not None:
             classes = enum_classes
         # This more specific type hint is the key to the fix.
-        self.enum_classes: list[Type[Enum]] = classes
-        self.events: DefaultDict[Enum, int] = defaultdict(int)
+        self.enum_classes: list[type[Enum]] = classes
+        self.events: defaultdict[Enum, int] = defaultdict(int)
         self.num_exceptions_saved: int = num_exceptions_saved
         self.num_events_data_saved: int = num_events_data_saved
-        self.events_data_saved: DefaultDict[Enum, list] = defaultdict(list)
-        self.exceptions_count: DefaultDict[type, int] = defaultdict(int)
-        self.exceptions_saved: DefaultDict[type, list] = defaultdict(list)
+        self.events_data_saved: defaultdict[Enum, list] = defaultdict(list)
+        self.exceptions_count: defaultdict[type, int] = defaultdict(int)
+        self.exceptions_saved: defaultdict[type, list] = defaultdict(list)
 
     def add_event(self, value: Enum, data=None) -> None:
         assert any(isinstance(value, cls) for cls in self.enum_classes), EventSummary.err_msg
@@ -52,7 +51,7 @@ class EventSummary:
         assert any(isinstance(value, cls) for cls in self.enum_classes), EventSummary.err_msg
         return self.events[value]
 
-    def get_enum_classes(self) -> Iterable[Type[Enum]]:
+    def get_enum_classes(self) -> Iterable[type[Enum]]:
         return self.enum_classes
 
     def add(self, event_summary: "EventSummary") -> None:

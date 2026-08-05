@@ -38,6 +38,18 @@ classifiers = [
 dependencies = [
 ]
 
+[dependency-groups]
+dev = [
+    "pyclassifiers",
+    "pydmt",
+    "pymakehelper",
+    "pycmdtools",
+    "pylint",
+    "pytest",
+    "mypy",
+    "ruff",
+]
+
 [project.urls]
 "Homepage" = "https://github.com/veltzer/pyeventsummary"
 "Bug Tracker" = "https://github.com/veltzer/pyeventsummary/issues"
@@ -79,5 +91,5 @@ warn_unused_configs = true
 [tool.hatch.envs.default]
 installer = "uv"
 
-[tool.uv.pip]
+[tool.uv]
 prerelease = "disallow"

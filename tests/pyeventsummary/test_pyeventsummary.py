@@ -1,6 +1,7 @@
-from unittest import TestCase
-from enum import Enum
+""" test_pyeventsummary.py """
 
+from enum import Enum
+from unittest import TestCase
 
 from pyeventsummary.pyeventsummary import EventSummary
 
