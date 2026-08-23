@@ -9,3 +9,4 @@ KEYWORDS = {
     "print",
     "enum",
 }
+PYPI = true
