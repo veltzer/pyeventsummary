@@ -40,10 +40,11 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    "mypy",
     "pylint",
     "pytest",
-    "mypy",
     "ruff",
+    "sphinx",
 ]
 
 [project.urls]
