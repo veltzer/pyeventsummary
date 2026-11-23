@@ -4,6 +4,8 @@ from enum import Enum
 from typing import Any
 from unittest import TestCase
 
+import pytest
+
 from pyeventsummary.pyeventsummary import EventSummary
 
 
@@ -24,9 +26,9 @@ class TestErrors(TestCase):
     def test_create_and_pass_one_bad(self):
         e = EventSummary(enum_class=MyEnum)
         not_an_enum: Any = 1
-        with self.assertRaises(AssertionError) as context:
+        with pytest.raises(AssertionError) as context:
             e.add_event(not_an_enum)
-        self.assertTrue(EventSummary.err_msg in str(context.exception))
+        assert EventSummary.err_msg in str(context.value)
 
     def test_check_accumulation(self):
         e = EventSummary(enum_class=MyEnum)
@@ -34,9 +36,9 @@ class TestErrors(TestCase):
             e.add_event(MyEnum.member_a)
         for _ in range(20):
             e.add_event(MyEnum.member_b)
-        self.assertEqual(e.get_event_count(MyEnum.member_a), 10)
-        self.assertEqual(e.get_event_count(MyEnum.member_b), 20)
-        self.assertEqual(e.get_event_count(MyEnum.member_c), 0)
+        assert e.get_event_count(MyEnum.member_a) == 10
+        assert e.get_event_count(MyEnum.member_b) == 20
+        assert e.get_event_count(MyEnum.member_c) == 0
 
     def test_aggregation(self):
         e1 = EventSummary(enum_class=MyEnum)
@@ -48,9 +50,9 @@ class TestErrors(TestCase):
             e1.add_event(MyEnum.member_b)
             e2.add_event(MyEnum.member_a)
         e1.add(e2)
-        self.assertEqual(e1.get_event_count(MyEnum.member_a), 30)
-        self.assertEqual(e1.get_event_count(MyEnum.member_b), 30)
-        self.assertEqual(e1.get_event_count(MyEnum.member_c), 0)
+        assert e1.get_event_count(MyEnum.member_a) == 30
+        assert e1.get_event_count(MyEnum.member_b) == 30
+        assert e1.get_event_count(MyEnum.member_c) == 0
 
     def test_print(self):
         e = EventSummary(MyEnum)
