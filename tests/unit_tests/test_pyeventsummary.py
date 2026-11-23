@@ -1,6 +1,7 @@
 """ test_pyeventsummary.py """
 
 from enum import Enum
+from typing import Any
 from unittest import TestCase
 
 from pyeventsummary.pyeventsummary import EventSummary
@@ -22,8 +23,9 @@ class TestErrors(TestCase):
 
     def test_create_and_pass_one_bad(self):
         e = EventSummary(enum_class=MyEnum)
+        not_an_enum: Any = 1
         with self.assertRaises(AssertionError) as context:
-            e.add_event(1)
+            e.add_event(not_an_enum)
         self.assertTrue(EventSummary.err_msg in str(context.exception))
 
     def test_check_accumulation(self):
