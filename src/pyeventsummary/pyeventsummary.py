@@ -2,8 +2,11 @@
 
 import sys
 from collections import defaultdict
-from collections.abc import Iterable
-from enum import Enum
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from collections.abc import Iterable
+    from enum import Enum
 
 
 class EventSummary:
