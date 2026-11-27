@@ -2,7 +2,7 @@
 
 import sys
 from collections import defaultdict
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
     from collections.abc import Iterable
@@ -40,9 +40,9 @@ class EventSummary:
         self.events: defaultdict[Enum, int] = defaultdict(int)
         self.num_exceptions_saved: int = num_exceptions_saved
         self.num_events_data_saved: int = num_events_data_saved
-        self.events_data_saved: defaultdict[Enum, list] = defaultdict(list)
+        self.events_data_saved: defaultdict[Enum, list[Any]] = defaultdict(list)
         self.exceptions_count: defaultdict[type, int] = defaultdict(int)
-        self.exceptions_saved: defaultdict[type, list] = defaultdict(list)
+        self.exceptions_saved: defaultdict[type, list[tuple[BaseException | None, str]]] = defaultdict(list)
 
     def add_event(self, value: Enum, data=None) -> None:
         assert any(isinstance(value, cls) for cls in self.enum_classes), EventSummary.err_msg
