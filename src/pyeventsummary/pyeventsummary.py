@@ -68,7 +68,7 @@ class EventSummary:
         for event_summary in event_summaries:
             self.add(event_summary)
 
-    def print(self, title: str | None = None, output_file_handle=sys.stdout, show_zero_events: bool = False) -> None:
+    def print(self, title: str | None = None, output_file_handle=sys.stdout, *, show_zero_events: bool = False) -> None:
         if title:
             print(title, file=output_file_handle)
         print("counts", file=output_file_handle)
