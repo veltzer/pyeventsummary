@@ -16,21 +16,21 @@ class MyEnum(Enum):
 
 
 class TestErrors(TestCase):
-    def test_create(self):
+    def test_create(self) -> None:
         _ = EventSummary(enum_class=MyEnum)
 
-    def test_create_and_pass_one_good(self):
+    def test_create_and_pass_one_good(self) -> None:
         e = EventSummary(enum_class=MyEnum)
         e.add_event(MyEnum.member_a)
 
-    def test_create_and_pass_one_bad(self):
+    def test_create_and_pass_one_bad(self) -> None:
         e = EventSummary(enum_class=MyEnum)
         not_an_enum: Any = 1
         with pytest.raises(AssertionError) as context:
             e.add_event(not_an_enum)
         assert EventSummary.err_msg in str(context.value)
 
-    def test_check_accumulation(self):
+    def test_check_accumulation(self) -> None:
         e = EventSummary(enum_class=MyEnum)
         for _ in range(10):
             e.add_event(MyEnum.member_a)
@@ -40,7 +40,7 @@ class TestErrors(TestCase):
         assert e.get_event_count(MyEnum.member_b) == 20
         assert e.get_event_count(MyEnum.member_c) == 0
 
-    def test_aggregation(self):
+    def test_aggregation(self) -> None:
         e1 = EventSummary(enum_class=MyEnum)
         e2 = EventSummary(enum_class=MyEnum)
         for _ in range(10):
@@ -54,7 +54,7 @@ class TestErrors(TestCase):
         assert e1.get_event_count(MyEnum.member_b) == 30
         assert e1.get_event_count(MyEnum.member_c) == 0
 
-    def test_print(self):
+    def test_print(self) -> None:
         e = EventSummary(MyEnum)
         for _ in range(10):
             e.add_event(MyEnum.member_a)
@@ -62,7 +62,7 @@ class TestErrors(TestCase):
             e.add_event(MyEnum.member_b)
         e.print()
 
-    def test_catch_exception(self):
+    def test_catch_exception(self) -> None:
         e = EventSummary(MyEnum)
         with e:
             raise ValueError("this is an exception")

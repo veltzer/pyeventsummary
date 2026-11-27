@@ -2,11 +2,12 @@
 
 import sys
 from collections import defaultdict
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING, Any, TextIO
 
 if TYPE_CHECKING:
     from collections.abc import Iterable
     from enum import Enum
+    from types import TracebackType
 
 
 class EventSummary:
@@ -44,7 +45,7 @@ class EventSummary:
         self.exceptions_count: defaultdict[type, int] = defaultdict(int)
         self.exceptions_saved: defaultdict[type, list[tuple[BaseException | None, str]]] = defaultdict(list)
 
-    def add_event(self, value: Enum, data=None) -> None:
+    def add_event(self, value: Enum, data: object = None) -> None:
         assert any(isinstance(value, cls) for cls in self.enum_classes), EventSummary.err_msg
         self.events[value] += 1
         if data is not None and len(self.events_data_saved[value]) < self.num_events_data_saved:
@@ -68,7 +69,7 @@ class EventSummary:
         for event_summary in event_summaries:
             self.add(event_summary)
 
-    def print(self, title: str | None = None, output_file_handle=sys.stdout, *, show_zero_events: bool = False) -> None:
+    def print(self, title: str | None = None, output_file_handle: TextIO = sys.stdout, *, show_zero_events: bool = False) -> None:
         if title:
             print(title, file=output_file_handle)
         print("counts", file=output_file_handle)
@@ -88,10 +89,10 @@ class EventSummary:
             for event_data in event_data_list:
                 print(f"\tdata [{event_data}]", file=output_file_handle)
 
-    def __enter__(self):
+    def __enter__(self) -> None:
         pass
 
-    def __exit__(self, e_type, e_val, trace_back) -> bool | None:
+    def __exit__(self, e_type: type[BaseException] | None, e_val: BaseException | None, trace_back: TracebackType | None) -> bool | None:
         if e_type is not None:
             self.exceptions_count[e_type] += 1
             if len(self.exceptions_saved[e_type]) < self.num_exceptions_saved:
